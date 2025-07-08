@@ -7,6 +7,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+print("Loaded token:", os.getenv("SLACK_BOT_TOKEN"))
+
+
 bolt_app = App(
     token=os.getenv("SLACK_BOT_TOKEN"),
     signing_secret=os.getenv("SLACK_SIGNING_SECRET")
