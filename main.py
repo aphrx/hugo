@@ -1,29 +1,34 @@
-import os
-from fastapi import FastAPI, Request
-from slack_bolt import App
+from fastapi import Request, FastAPI
 from slack_bolt.adapter.fastapi import SlackRequestHandler
+from slack_bolt import App
+import os
+import json
 from dotenv import load_dotenv
 
-# Load secrets
 load_dotenv()
 
-# Slack Bolt app
 bolt_app = App(
     token=os.getenv("SLACK_BOT_TOKEN"),
     signing_secret=os.getenv("SLACK_SIGNING_SECRET")
 )
 
-# Example slash command
-@bolt_app.command("/hello")
-def handle_hello_command(ack, respond, command):
+# Example /hugo slash command
+@bolt_app.command("/hugo")
+def hugo_command(ack, respond, command):
     ack()
-    user = command["user_name"]
-    respond(f"👋 Hey <@{user}>, I’m alive!")
+    respond(f"Hey <@{command['user_id']}>, you said: {command['text']}")
 
-# FastAPI app
 app = FastAPI()
 handler = SlackRequestHandler(bolt_app)
 
 @app.post("/slack/events")
 async def slack_events(request: Request):
+    body = await request.body()
+    payload = json.loads(body)
+
+    # Handle Slack's initial URL verification
+    if payload.get("type") == "url_verification":
+        return {"challenge": payload.get("challenge")}
+
+    # Otherwise, pass to Bolt handler
     return await handler.handle(request)
