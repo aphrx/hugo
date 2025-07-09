@@ -65,8 +65,7 @@ Copy the `https://` forwarding URL and use it in your Slack app's slash command 
 
 ## Deploying on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/SZ_prB?referralCode=IkKUB5)
-
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/JRpxdM?referralCode=IkKUB5)
 
 ### After deploying:
 
