@@ -15,15 +15,15 @@ bolt_app = App(
 )
 
 # === Slash Command: /hugo ===
-@bolt_app.command("/hugo")
-def hugo_command(ack, respond, command):
+@bolt_app.command("/hello")
+def hello_command(ack, respond, command):
     try:
         ack()
-        respond(f"Hey <@{command['user_id']}>, you said: {command['text']}")
+        respond(f"👋 Hello <@{command['user_id']}>!")
     except Exception as e:
-        respond("⚠️ Oops, something went wrong handling that command.")
-        raise e  # optional: log the error or send to Sentry
-
+        respond("⚠️ Sorry, something went wrong.")
+        raise e 
+    
 # === FastAPI setup ===
 app = FastAPI()
 handler = SlackRequestHandler(bolt_app)
