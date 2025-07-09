@@ -16,4 +16,4 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?templateUrl=https://github.com/aphrx/hugo)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/SZ_prB?referralCode=IkKUB5)
